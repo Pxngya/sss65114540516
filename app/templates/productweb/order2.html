@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สั่งซื้อป้าย</title>
+<link rel="stylesheet" href="{% static 'css/order1.css' %}">
+</head>
+<body>
+  {% include 'base/tab_login.html' %}
+  {% include 'app/components/site_header.html' %}
+<div class="container">
+  <h2>ข้อมูลป้ายไฟที่จะสั่งทำ</h2>
+  <form method="post" enctype="multipart/form-data" id="form2" action="{% url 'order2' %}">
+    {% csrf_token %}
+    
+    <label for="name">ชื่อป้ายไฟที่ต้องการ:</label>
+    <input type="text" id="name" name="name" placeholder="ชื่อป้าย" required>
+
+    <label for="category">ขนาดป้ายไฟ:</label>
+    <select id="category" name="category">
+      <option value="30x60">30 x 60 ซม.</option>
+      <option value="40x80">40 x 80 ซม.</option>
+      <option value="50x100">50 x 100 ซม.</option>
+      <option value="60x120">60 x 120 ซม.</option>
+      <option value="80x160">80 x 160 ซม.</option>
+    </select>
+    
+
+    <label for="material">แบบป้าย:</label>
+    <select id="material" name="material">
+      <option value="Neon">ป้ายไฟนีออน</option>
+      <option value="LED">ป้ายไฟ LED</option>
+      <option value="Digital">ป้ายดิจิตอล</option>
+    </select>
+     
+    
+    <label for="material">วัสดุ:</label>
+    <select id="material" name="material">
+      <option value="Aluminum">อลูมิเนียม</option>
+      <option value="Plastic">พลาสติก</option>
+      <option value="Glass">แก้ว</option>
+    </select>  
+
+    <label for="message">รายละเอียดป้ายเพิ่มเติม:</label>
+    <textarea id="message" name="message" placeholder="เพิ่มเติมเกี่ยวกับป้าย"></textarea>
+
+    <label for="attachment">Attachment:</label>
+    <input type="file" id="attachment" name="attachment">
+
+    <button type="submit">Order</button>
+    
+  </form>
+</div>
+<script src="{% static 'js/order1.js' %}"></script>
+</body>
+</html>

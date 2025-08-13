@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สั่งซื้อป้าย</title>
+<link rel="stylesheet" href="{% static 'css/order1.css' %}">
+</head>
+<body>
+  {% include 'base/tab_login.html' %}
+  {% include 'app/components/site_header.html' %}
+<div class="container">
+  
+  <h2>ข้อมูลป้ายสติ๊กเกอร์ที่จะสั่งทำ</h2>
+  <form method="post" enctype="multipart/form-data" id="form2" action="{% url 'order3' %}">
+    {% csrf_token %}
+    <label for="name">ชื่อป้ายสติ๊กเกอร์ที่ต้องการ:</label>
+    <input type="text" id="name" name="name" placeholder="ชื่อป้าย">
+
+    <label for="category">ขนาดป้าย:</label>
+    <select id="category" name="category">
+      <option value="15x40">15 x 40 ซม.</option>
+      <option value="20x60">20 x 60 ซม.</option>
+      <option value="30x80">30 x 80 ซม.</option>
+    </select>
+
+    <label for="material">วัสดุป้ายสติ๊กเกอร์:</label>
+    <select id="material" name="material">
+      <option value="Vinyl">วินิล</option>
+      <option value="Paper">กระดาษ</option>
+      <option value="Plastic">พลาสติก</option>
+    </select>
+    
+
+    <label for="message">รายละเอียดป้ายเพิ่มเติม:</label>
+    <textarea id="message" name="message" placeholder="Your message"></textarea>
+
+    <label for="attachment">Attachment:</label>
+    <input type="file" id="attachment" name="attachment">
+
+    <button type="submit">Order</button>
+    
+  </form>
+</div>
+
+</body>
+</html>
