@@ -21,6 +21,7 @@ django-extensions==3.2.3
 et-xmlfile==1.1.0
 executing==1.2.0
 hyperlink==21.0.0
+gunicorn
 idna==3.6
 incremental==22.10.0
 ipython==8.14.0
@@ -39,6 +40,7 @@ pyasn1_modules==0.4.0
 pycparser==2.22
 Pygments==2.15.1
 pyOpenSSL==24.2.1
+psycopg2-binary
 requests==2.31.0
 service-identity==24.1.0
 setuptools==69.5.1
