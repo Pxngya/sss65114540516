@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - "10516:8000"
     depends_on:
       db:
         condition: service_healthy
@@ -31,7 +31,7 @@ services:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
     ports:
-      - "5432:5432"
+      - "20516:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
