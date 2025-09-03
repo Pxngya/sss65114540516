@@ -9,8 +9,7 @@ services:
              gunicorn webapp.wsgi:application --bind 0.0.0.0:8000 --workers 4"
     volumes:
       - .:/app
-    ports:
-      - "10516:8000"
+      
     depends_on:
       db:
         condition: service_healthy
@@ -21,6 +20,17 @@ services:
       DB_PASSWORD: mypassword
       DB_HOST: db
       DB_PORT: 5432
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "10516:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d:ro
+      - ./static:/app/static:ro
+    depends_on:
+      - web
 
   db:
     image: postgres:15
