@@ -1,15 +1,17 @@
-version: '3.8'
+
 
 services:
   web:
     build: .
     container_name: django_app
+    env_file:
+      - .env 
     command: >
       sh -c "python manage.py migrate &&
              gunicorn webapp.wsgi:application --bind 0.0.0.0:8000 --workers 4"
     volumes:
       - .:/app
-      
+
     depends_on:
       db:
         condition: service_healthy
@@ -20,15 +22,17 @@ services:
       DB_PASSWORD: mypassword
       DB_HOST: db
       DB_PORT: 5432
+    ports:
+      - "10516:8000"   # ← expose port web container เป็น 10516 บน host
 
   nginx:
     image: nginx:latest
     container_name: nginx_proxy
     ports:
-      - "10516:80"
+      - "80:80"        # ← map port host 80 → container 80
     volumes:
-      - ./nginx:/etc/nginx/conf.d:ro
-      - ./static:/app/static:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      
     depends_on:
       - web
 
@@ -40,8 +44,7 @@ services:
       POSTGRES_DB: mydb
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
-    ports:
-      - "20516:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
